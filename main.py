@@ -4,9 +4,10 @@ from pathlib import Path
 import urllib.parse 
 import datetime
 from dotenv import load_dotenv
+import telegram
+
 
 load_dotenv()
-
 TOKEN = os.getenv('TOKEN')
 
 
@@ -84,7 +85,14 @@ def get_type_image(url):
     result = os.path.splitext(result)
     return result[1]
 
-fetch_spacex_last_launch('images')
-fetch_nasa_apod('images')
-fetch_nasa_epic('images')
 
+# fetch_spacex_last_launch('images')
+# fetch_nasa_apod('images')
+# fetch_nasa_epic('images')
+
+bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
+
+print(bot.get_me())
+# bot.send_message(chat_id='@photo_cosmos', text='Это первое сообщение отправленное с помощью бота!')
+# bot.send_document(chat_id='@photo_cosmos', document=open('images/Nasa29.jpg', 'rb'))
+bot.send_photo(chat_id='@photo_cosmos', photo=open('images/Nasa29.jpg', 'rb'))
