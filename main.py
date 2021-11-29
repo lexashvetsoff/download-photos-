@@ -5,6 +5,7 @@ import urllib.parse
 import datetime
 from dotenv import load_dotenv
 import telegram
+import time
 
 
 load_dotenv()
@@ -86,13 +87,47 @@ def get_type_image(url):
     return result[1]
 
 
+def get_files(my_path):
+    list_files = []
+    for file in os.listdir(my_path):
+        if os.path.isfile(os.path.join(my_path, file)):
+            list_files.append(file)
+    return list_files
+
+
+def remove_files(dirname, file_list):
+    os.chdir(dirname)
+    for file in file_list:
+        os.remove(file)
+    os.chdir('../.')
+
+
+# lf = get_files('images')
+
 # fetch_spacex_last_launch('images')
 # fetch_nasa_apod('images')
 # fetch_nasa_epic('images')
 
 bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
 
-print(bot.get_me())
+while True:
+    fetch_spacex_last_launch('images')
+    # fetch_nasa_apod('images')
+    # fetch_nasa_epic('images')
+
+    files_list = get_files('images')
+
+    os.chdir('images')
+
+    for file in files_list:
+        bot.send_photo(chat_id='@photo_cosmos', photo=open(file, 'rb'))
+        time.sleep(int(os.getenv('sleep')))
+    
+    os.chdir('../.')
+
+    remove_files('images', files_list)
+
+# print(bot.get_me())
 # bot.send_message(chat_id='@photo_cosmos', text='Это первое сообщение отправленное с помощью бота!')
 # bot.send_document(chat_id='@photo_cosmos', document=open('images/Nasa29.jpg', 'rb'))
-bot.send_photo(chat_id='@photo_cosmos', photo=open('images/Nasa29.jpg', 'rb'))
+# bot.send_photo(chat_id='@photo_cosmos', photo=open('images/Nasa29.jpg', 'rb'))
