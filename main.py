@@ -4,6 +4,7 @@ import telegram
 import time
 import fetch_nasa
 import fetch_spacex
+import shutil
 
 
 def get_files(my_path):
@@ -12,13 +13,6 @@ def get_files(my_path):
         if os.path.isfile(os.path.join(my_path, file)):
             list_files.append(file)
     return list_files
-
-
-def remove_files(dirname, file_list):
-    os.chdir(dirname)
-    for file in file_list:
-        os.remove(file)
-    os.chdir('../.')
 
 
 def main():
@@ -41,7 +35,7 @@ def main():
         
         os.chdir('../.')
 
-        remove_files('images', files_list)
+        shutil.rmtree('images', ignore_errors=False, onerror=None)
 
 
 if __name__ == '__main__':
