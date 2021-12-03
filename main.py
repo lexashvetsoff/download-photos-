@@ -8,11 +8,11 @@ import shutil
 
 
 def get_files(my_path):
-    list_files = []
+    files = []
     for file in os.listdir(my_path):
         if os.path.isfile(os.path.join(my_path, file)):
-            list_files.append(file)
-    return list_files
+            files.append(file)
+    return files
 
 
 def main():
@@ -24,13 +24,13 @@ def main():
         fetch_nasa.fetch_nasa_apod('images')
         fetch_nasa.fetch_nasa_epic('images')
 
-        files_list = get_files('images')
+        files = get_files('images')
 
         os.chdir('images')
 
-        for file in files_list:
-            with open(file, 'rb') as my_file:
-                bot.send_photo(chat_id=os.getenv('chat_id'), photo=my_file)
+        for file in files:
+            with open(file, 'rb') as new_file:
+                bot.send_photo(chat_id=os.getenv('chat_id'), photo=new_file)
             time.sleep(int(os.getenv('sleep')))
         
         os.chdir('../.')
