@@ -3,18 +3,7 @@ import os
 from pathlib import Path
 import urllib.parse 
 import datetime
-
-
-def load_image(url, filename, dirname):
-    os.chdir(dirname)
-
-    response = requests.get(url)
-    response.raise_for_status()
-
-    with open(filename, 'wb') as file:
-        file.write(response.content)
-    
-    os.chdir('../.')
+import load_files as lf
 
 
 def get_type_image(url):
@@ -41,7 +30,7 @@ def fetch_nasa_apod(dirname):
     answer = response.json()
     for image_number, image_link in enumerate(answer):
         link = get_type_image(image_link['url'])
-        load_image(image_link['url'], f'Nasa{image_number}{link}', 'images')
+        lf.load_image(image_link['url'], f'Nasa{image_number}{link}', 'images')
 
 
 def fetch_nasa_epic(dirname):
@@ -64,4 +53,4 @@ def fetch_nasa_epic(dirname):
         item_name = item['image']
         token = os.getenv('TOKEN')
         url = f'https://api.nasa.gov/EPIC/archive/natural/{item_date.year}/{item_date.month}/{item_date.day}/png/{item_name}.png?api_key={token}'
-        load_image(url, f'{item_name}.png', 'images')
+        lf.load_image(url, f'{item_name}.png', 'images')
