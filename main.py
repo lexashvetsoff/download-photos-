@@ -36,7 +36,7 @@ def main():
 
         for file in files_list:
             with open(file, 'rb') as my_file:
-                bot.send_photo(chat_id='@photo_cosmos', photo=my_file)
+                bot.send_photo(chat_id=os.getenv('chat_id'), photo=my_file)
             time.sleep(int(os.getenv('sleep')))
         
         os.chdir('../.')
