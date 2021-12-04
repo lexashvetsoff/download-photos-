@@ -1,11 +1,10 @@
 import requests
-from pathlib import Path
 import load_files as lf
 
 
 def fetch_spacex_last_launch(dirname):
 
-    Path(dirname).mkdir(parents=True, exist_ok=True)
+    lf.path_check(dirname)
 
     url = 'https://api.spacexdata.com/v4/launches'
 

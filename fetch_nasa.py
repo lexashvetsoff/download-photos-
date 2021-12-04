@@ -1,6 +1,5 @@
 import requests
 import os
-from pathlib import Path
 import urllib.parse 
 import datetime
 import load_files as lf
@@ -15,7 +14,7 @@ def get_type_image(url):
 
 def fetch_nasa_apod(dirname):
 
-    Path(dirname).mkdir(parents=True, exist_ok=True)
+    lf.path_check(dirname)
 
     url = 'https://api.nasa.gov/planetary/apod'
 
@@ -34,7 +33,8 @@ def fetch_nasa_apod(dirname):
 
 
 def fetch_nasa_epic(dirname):
-    Path(dirname).mkdir(parents=True, exist_ok=True)
+    
+    lf.path_check(dirname)
 
     url = f'https://api.nasa.gov/EPIC/api/natural/images'
 
