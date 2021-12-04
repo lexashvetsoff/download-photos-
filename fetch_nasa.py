@@ -53,4 +53,6 @@ def fetch_nasa_epic(dirname, api_key):
         item_name = item['image']
         token = os.getenv('TOKEN')
         url = f'https://api.nasa.gov/EPIC/archive/natural/{item_date.year}/{item_date.month}/{item_date.day}/png/{item_name}.png?api_key={token}'
-        lf.load_image(url, f'{item_name}.png', 'images')
+        params = urllib.parse.urlparse(url)
+        new_url = urllib.parse.urlencode(params)
+        lf.load_image(new_url, f'{item_name}.png', 'images')
