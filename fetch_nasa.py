@@ -47,8 +47,8 @@ def fetch_nasa_epic(dirname):
 
     answer = response.json()
 
-    for i in range(len(answer)):
-        item = answer[i]
+    for ans in answer:
+        item = ans
         item_date = datetime.datetime.fromisoformat(item['date'])
         item_name = item['image']
         token = os.getenv('TOKEN')
