@@ -17,12 +17,13 @@ def get_files(my_path):
 
 def main():
     load_dotenv()
+    api_key = os.getenv('TOKEN')
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
 
     while True:
         fetch_spacex.fetch_spacex_last_launch('images')
-        fetch_nasa.fetch_nasa_apod('images')
-        fetch_nasa.fetch_nasa_epic('images')
+        fetch_nasa.fetch_nasa_epic('images', api_key)
+        fetch_nasa.fetch_nasa_apod('images', api_key)
 
         files = get_files('images')
 

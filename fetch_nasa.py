@@ -12,7 +12,7 @@ def get_type_image(url):
     return result[1]
 
 
-def fetch_nasa_apod(dirname):
+def fetch_nasa_apod(dirname, api_key):
 
     lf.path_check(dirname)
 
@@ -20,7 +20,7 @@ def fetch_nasa_apod(dirname):
 
     payload = {
         'count': 30,
-        'api_key': os.getenv('TOKEN')
+        'api_key': api_key
     }
 
     response = requests.get(url, params=payload)
@@ -32,14 +32,14 @@ def fetch_nasa_apod(dirname):
         lf.load_image(image_link['url'], f'Nasa{image_number}{link}', 'images')
 
 
-def fetch_nasa_epic(dirname):
+def fetch_nasa_epic(dirname, api_key):
     
     lf.path_check(dirname)
 
     url = f'https://api.nasa.gov/EPIC/api/natural/images'
 
     payload = {
-        'api_key': os.getenv('TOKEN')
+        'api_key': api_key
     }
 
     response = requests.get(url, params=payload)
