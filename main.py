@@ -11,7 +11,7 @@ def get_filepaths(path):
     filepaths = []
     for file in os.listdir(path):
         if os.path.isfile(os.path.join(path, file)):
-            filepaths.append(file)
+            filepaths.append(os.path.join(path, file))
     return filepaths
 
 
@@ -27,14 +27,10 @@ def main():
 
         filepaths = get_filepaths('images')
 
-        os.chdir('images')
-
         for filepath in filepaths:
             with open(filepath, 'rb') as new_file:
                 bot.send_photo(chat_id=os.getenv('tg_chat_id'), photo=new_file)
             time.sleep(int(os.getenv('sleep')))
-        
-        os.chdir('../.')
 
         shutil.rmtree('images', ignore_errors=False, onerror=None)
 

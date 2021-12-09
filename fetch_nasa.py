@@ -48,11 +48,10 @@ def fetch_nasa_epic(dirname, api_key):
     answer = response.json()
 
     for ans in answer:
-        item = ans
-        item_date = datetime.datetime.fromisoformat(item['date'])
-        item_name = item['image']
+        ans_date = datetime.datetime.fromisoformat(ans['date'])
+        ans_name = ans['image']
         token = os.getenv('TOKEN')
-        url = f'https://api.nasa.gov/EPIC/archive/natural/{item_date.year}/{item_date.month}/{item_date.day}/png/{item_name}.png?api_key={token}'
+        url = f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png?api_key={token}'
         params = urllib.parse.urlparse(url)
         new_url = urllib.parse.urlencode(params)
-        lf.load_image(new_url, f'{item_name}.png', 'images')
+        lf.load_image(new_url, f'{ans_name}.png', 'images')
