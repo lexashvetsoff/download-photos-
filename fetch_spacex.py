@@ -5,8 +5,6 @@ import load_files as lf
 def fetch_spacex_last_launch(dirname):
     FLIGHT_NUMBER = 93
 
-    lf.path_check(dirname)
-
     url = 'https://api.spacexdata.com/v4/launches'
 
     response = requests.get(url)

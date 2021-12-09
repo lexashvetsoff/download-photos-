@@ -14,8 +14,6 @@ def get_type_image(url):
 
 def fetch_nasa_apod(dirname, api_key):
 
-    lf.path_check(dirname)
-
     url = 'https://api.nasa.gov/planetary/apod'
 
     payload = {
@@ -29,12 +27,10 @@ def fetch_nasa_apod(dirname, api_key):
     answer = response.json()
     for image_number, image_link in enumerate(answer):
         link = get_type_image(image_link['url'])
-        lf.load_image(image_link['url'], f'Nasa{image_number}{link}', 'images')
+        lf.load_image(image_link['url'], f'Nasa{image_number}{link}', dirname)
 
 
 def fetch_nasa_epic(dirname, api_key):
-    
-    lf.path_check(dirname)
 
     url = f'https://api.nasa.gov/EPIC/api/natural/images'
 
@@ -54,4 +50,4 @@ def fetch_nasa_epic(dirname, api_key):
         url = f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png?api_key={token}'
         params = urllib.parse.urlparse(url)
         new_url = urllib.parse.urlencode(params)
-        lf.load_image(new_url, f'{ans_name}.png', 'images')
+        lf.load_image(new_url, f'{ans_name}.png', dirname)

@@ -5,6 +5,7 @@ import time
 import fetch_nasa
 import fetch_spacex
 import shutil
+from pathlib import Path
 
 
 def get_filepaths(path):
@@ -19,6 +20,8 @@ def main():
     load_dotenv()
     nasa_api_key = os.getenv('NASA_TOKEN')
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
+
+    Path('images').mkdir(parents=True, exist_ok=True)
 
     while True:
         fetch_spacex.fetch_spacex_last_launch('images')
