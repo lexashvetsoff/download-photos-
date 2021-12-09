@@ -7,10 +7,10 @@ import fetch_spacex
 import shutil
 
 
-def get_filepaths(my_path):
+def get_filepaths(path):
     filepaths = []
-    for file in os.listdir(my_path):
-        if os.path.isfile(os.path.join(my_path, file)):
+    for file in os.listdir(path):
+        if os.path.isfile(os.path.join(path, file)):
             filepaths.append(file)
     return filepaths
 
