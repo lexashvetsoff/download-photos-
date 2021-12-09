@@ -24,9 +24,9 @@ def main():
     Path('images').mkdir(parents=True, exist_ok=True)
 
     while True:
-        fetch_spacex.fetch_spacex_last_launch('images')
+        # fetch_spacex.fetch_spacex_last_launch('images')
         fetch_nasa.fetch_nasa_epic('images', nasa_api_key)
-        fetch_nasa.fetch_nasa_apod('images', nasa_api_key)
+        # fetch_nasa.fetch_nasa_apod('images', nasa_api_key)
 
         filepaths = get_filepaths('images')
 
