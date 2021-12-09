@@ -7,12 +7,12 @@ import fetch_spacex
 import shutil
 
 
-def get_files(my_path):
-    files = []
+def get_filepaths(my_path):
+    filepaths = []
     for file in os.listdir(my_path):
         if os.path.isfile(os.path.join(my_path, file)):
-            files.append(file)
-    return files
+            filepaths.append(file)
+    return filepaths
 
 
 def main():
@@ -25,12 +25,12 @@ def main():
         fetch_nasa.fetch_nasa_epic('images', api_key)
         fetch_nasa.fetch_nasa_apod('images', api_key)
 
-        files = get_files('images')
+        filepaths = get_filepaths('images')
 
         os.chdir('images')
 
-        for file in files:
-            with open(file, 'rb') as new_file:
+        for filepath in filepaths:
+            with open(filepath, 'rb') as new_file:
                 bot.send_photo(chat_id=os.getenv('chat_id'), photo=new_file)
             time.sleep(int(os.getenv('sleep')))
         
