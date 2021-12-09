@@ -5,7 +5,7 @@ import datetime
 import load_files as lf
 
 
-def get_type_image(url):
+def get_extension(url):
     result = urllib.parse.urlsplit(url).path
     result = urllib.parse.unquote(result)
     result = os.path.splitext(result)
@@ -26,7 +26,7 @@ def fetch_nasa_apod(dirname, api_key):
 
     answer = response.json()
     for image_number, image_link in enumerate(answer):
-        link = get_type_image(image_link['url'])
+        link = get_extension(image_link['url'])
         lf.load_image(image_link['url'], f'Nasa{image_number}{link}', dirname)
 
 
