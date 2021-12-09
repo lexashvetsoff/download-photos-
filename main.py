@@ -17,13 +17,13 @@ def get_filepaths(path):
 
 def main():
     load_dotenv()
-    api_key = os.getenv('TOKEN')
+    nasa_api_key = os.getenv('NASA_TOKEN')
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
 
     while True:
         fetch_spacex.fetch_spacex_last_launch('images')
-        fetch_nasa.fetch_nasa_epic('images', api_key)
-        fetch_nasa.fetch_nasa_apod('images', api_key)
+        fetch_nasa.fetch_nasa_epic('images', nasa_api_key)
+        fetch_nasa.fetch_nasa_apod('images', nasa_api_key)
 
         filepaths = get_filepaths('images')
 
@@ -31,7 +31,7 @@ def main():
 
         for filepath in filepaths:
             with open(filepath, 'rb') as new_file:
-                bot.send_photo(chat_id=os.getenv('chat_id'), photo=new_file)
+                bot.send_photo(chat_id=os.getenv('tg_chat_id'), photo=new_file)
             time.sleep(int(os.getenv('sleep')))
         
         os.chdir('../.')
