@@ -10,9 +10,9 @@ from pathlib import Path
 
 def get_filepaths(path):
     filepaths = []
-    for file in os.listdir(path):
-        if os.path.isfile(os.path.join(path, file)):
-            filepaths.append(os.path.join(path, file))
+    for filename in os.listdir(path):
+        if os.path.isfile(os.path.join(path, filename)):
+            filepaths.append(os.path.join(path, filename))
     return filepaths
 
 
