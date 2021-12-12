@@ -37,6 +37,8 @@ def main():
 
         shutil.rmtree('images', ignore_errors=False, onerror=None)
 
+    url = urllib.parse.urlencode(urllib.parse.urlparse(f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png?api_key={token}'))
+
 
 if __name__ == '__main__':
     main()

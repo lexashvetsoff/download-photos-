@@ -47,5 +47,7 @@ def fetch_nasa_epic(dirname, api_key):
         ans_date = datetime.datetime.fromisoformat(ans['date'])
         ans_name = ans['image']
         token = api_key
-        url = urllib.parse.urlencode(urllib.parse.urlparse(f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png?api_key={token}'))
+        attributes_url = urllib.parse.urlparse(f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png')
+        attributes_url.params = f'api_key={token}'
+        url = urllib.parse.urlparse(attributes_url)
         lf.load_image(url, f'{ans_name}.png', dirname)
