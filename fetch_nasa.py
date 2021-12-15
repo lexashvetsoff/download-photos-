@@ -27,7 +27,8 @@ def fetch_nasa_apod(dirname, api_key):
     answer = response.json()
     for image_number, image_link in enumerate(answer):
         link = get_extension(image_link['url'])
-        lf.load_image(image_link['url'], f'Nasa{image_number}{link}', dirname)
+        params = {}
+        lf.load_image(image_link['url'], params, f'Nasa{image_number}{link}', dirname)
 
 
 def fetch_nasa_epic(dirname, api_key):
@@ -46,8 +47,5 @@ def fetch_nasa_epic(dirname, api_key):
     for ans in answer:
         ans_date = datetime.datetime.fromisoformat(ans['date'])
         ans_name = ans['image']
-        token = api_key
-        attributes_url = urllib.parse.urlparse(f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png')
-        attributes_url.params = f'api_key={token}'
-        url = urllib.parse.urlparse(attributes_url)
-        lf.load_image(url, f'{ans_name}.png', dirname)
+        url = f'https://api.nasa.gov/EPIC/archive/natural/{ans_date.year}/{ans_date.month}/{ans_date.day}/png/{ans_name}.png'
+        lf.load_image(url, payload, f'{ans_name}.png', dirname)
