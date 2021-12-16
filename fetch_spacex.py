@@ -13,5 +13,4 @@ def fetch_spacex_last_launch(dirname):
     answer = response.json()[flight_number]
 
     for image_number, image_link in enumerate(answer['links']['flickr']['original']):
-        params = {}
-        lf.load_image(image_link, params, f'Space{image_number}.jpg', dirname)
+        lf.load_image(image_link, f'Space{image_number}.jpg', dirname)

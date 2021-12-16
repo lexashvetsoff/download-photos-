@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def load_image(url, params, filename, dirname):
+def load_image(url, filename, dirname, params={}):
     path = os.path.join(dirname, filename)
 
     response = requests.get(url, params=params)
